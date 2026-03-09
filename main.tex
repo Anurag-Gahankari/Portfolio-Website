@@ -1,0 +1,287 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Anurag Gahankari's CV},
+    pdfauthor={Anurag Gahankari},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\textit{\small Anurag Gahankari - Page \thepage{} of \pageref*{LastPage}}
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{}\hspace{\widthof{Last updated in September 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+    \placelastupdatedtext
+\begin{header}
+    \textbf{\fontsize{24 pt}{24 pt}\selectfont Anurag Gahankari}
+
+    \vspace{0.3 cm}
+
+    \normalsize
+    \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Amravati}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{mailto:gahankarianurag@gmail.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}gahankarianurag@gmail.com}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{tel:+919970958169}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}+91 99709 58169}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://www.hackerrank.com/profile/gahankarianurag}{\color{black}{\footnotesize\faLink}\hspace*{0.13cm}hackerrank.com/profile/gahankarianurag}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/anurag-gahankari}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}anurag-gahankari}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://www.github.com/Anurag-Gahankari}{\color{black}{\footnotesize\faGithub}\hspace*{0.13cm}Anurag-Gahankari}}%
+\end{header}
+
+\section{Education}
+
+\begin{twocolentry}{\textit{Nov 2022 – Present}}
+    \textbf{Sipna College of Engineering and Technology, Amravati}
+    \textit{B.E. in Computer Science and Engineering}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item CGPA: 6.8
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm - 0.2 cm}
+
+\begin{twocolentry}{\textit{2020 – 2022}}
+    \textbf{Smt. Narsamma Hirayya Arts, Commerce \& Science College, Amravati}
+    \textit{HSC (Class 12)}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Percentage: 75.33\%
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm - 0.2 cm}
+
+\begin{twocolentry}{\textit{2015 – 2020}}
+    \textbf{Narayandas Laddha High School, Amravati}
+    \textit{SSC (Class 10)}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Percentage: 92.60\%
+    \end{highlights}
+\end{onecolentry}
+
+\section{Projects}
+
+\begin{twocolentry}{}
+    \textbf{Smart Grievance Portal — Full-Stack Complaint Management System}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Built a web-based portal for submitting, tracking, and managing citizen complaints.
+        \item Developed secure authentication using JWT and bcrypt with role-based access (admin/officer/user).
+        \item Implemented complaint CRUD APIs with status workflow (Pending → In Progress → Resolved → Closed).
+        \item Added Mongoose validation, standardized API responses, and global error handling for reliability.
+    \end{highlights}
+\end{onecolentry}
+
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{}
+    \textbf{SmoothGear - Local Garage Discovery \& Booking Platform}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Developed backend services for a full-stack app that helps users discover garages via geolocation.
+        \item Built secure REST APIs for login, bookings, and service requests using JWT-based auth.
+        \item Implemented role-based access control and structured MongoDB schemas using Mongoose.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Technologies}
+\begin{onecolentry}
+    \textbf{Languages:} Python, SQL, Java, JavaScript\\[0.2cm]
+    \textbf{Frameworks \& Libraries:} Node.js, Express.js, React.js\\[0.2cm]
+    \textbf{Data Science \& Analysis:} NumPy, Pandas, Seaborn\\[0.2cm]
+    \textbf{Databases:} MongoDB, MySQL\\[0.2cm]
+    \textbf{Tools \& Platforms:} Git, GitHub, Jupyter Notebook, Postman, VS Code
+\end{onecolentry}
+
+\section{Certifications}
+
+\textbf{MERN Stack Application Development – TechSaksham Program}
+\begin{highlights}
+    \item Completed under TechSaksham, a joint CSR initiative by Microsoft and SAP.
+    \item Program implemented by Edunet Foundation during academic year 2024–25.
+    \item Gained hands-on experience in full-stack MERN application development.
+    \item Built real-world projects applying React, Node.js, Express.js, and MongoDB.
+\end{highlights}
+
+\textbf{Artificial Intelligence \& Machine Learning with Python – Skills4Future Program}
+\begin{highlights}
+    \item Completed a beginner-to-intermediate certification in Artificial Intelligence and Machine Learning (AIML).
+    \item Learned Python programming fundamentals, including data structures, collections, and basic data preprocessing.
+    \item Gained practical exposure to data analysis, data visualization, and introductory machine learning concepts.
+    \item Implemented basic supervised and unsupervised learning models through guided exercises and practice projects.
+\end{highlights}
+
+\end{document}
