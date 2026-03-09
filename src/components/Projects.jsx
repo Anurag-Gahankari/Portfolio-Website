@@ -13,7 +13,7 @@ const Projects = () => {
                 "Added Mongoose validation, standardized API responses, and global error handling for reliability."
             ],
             tags: ["Node.js", "Express.js", "MongoDB", "JWT", "React.js"],
-            github: "https://github.com/Anurag-Gahankari",
+            github: "https://github.com/Anurag-Gahankari/smart-grievance-portal",
         },
         {
             title: "SmoothGear",
@@ -25,7 +25,7 @@ const Projects = () => {
                 "Implemented role-based access control and structured MongoDB schemas using Mongoose."
             ],
             tags: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT"],
-            github: "https://github.com/Anurag-Gahankari",
+            github: "https://github.com/Anurag-Gahankari/SmoothGearProject",
         }
     ];
 
